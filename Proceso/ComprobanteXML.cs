@@ -1,7 +1,10 @@
 ﻿using System;
 
 namespace Proceso {
-   public class ComprobanteXML {
+    public class ComprobanteXML {
+
+
+    
 
 
 
