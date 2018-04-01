@@ -185,7 +185,6 @@ namespace Proceso
             DateTime _fechaTimbrado = DateTime.Now;
 
             DateTime.TryParse(xComplemento.Attributes("FechaTimbrado").FirstOrDefault().Value, out _fechaTimbrado);
-            //oXml.fechaTimbrado = DateTime.Parse(xComplemento.Attributes("FechaTimbrado").FirstOrDefault().Value);
             oXml.fechaTimbrado = _fechaTimbrado;
             oXml.UUId = xComplemento.Attributes("UUID").FirstOrDefault().Value.ToString();
 
