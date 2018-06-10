@@ -23,5 +23,5 @@ namespace Proceso
 
         public int numeroRegistros { get; set; }
 
-    }
+    } // public class Respuesta
 }//namespace Proceso {

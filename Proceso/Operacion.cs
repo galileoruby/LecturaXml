@@ -49,7 +49,6 @@ namespace Proceso
         public List<ComprobanteXML> ArchivosXmlaProcesarObtener(String sCarpeta)
         {
 
-            //sCarpeta = @"G:\xmls";
 
             facturasGrid = new List<ComprobanteXML>();
 
@@ -152,34 +151,99 @@ namespace Proceso
 
 
 
+            oXml.version = "3.0"; //predeterminada
 
 
-            oXml.version = (String)XMLBase.Document.Root.Attribute("version").Value;
-            oXml.tipodeComprobante = (String)XMLBase.Document.Root.Attribute("tipoDeComprobante").Value;
-            oXml.total = Double.Parse(XMLBase.Document.Root.Attribute("total").Value);
-            oXml.subTotal = Double.Parse(XMLBase.Document.Root.Attribute("subTotal").Value);
-            oXml.fechaExpedido = DateTime.Parse(XMLBase.Document.Root.Attribute("fecha").Value);
-
-            oXml.folio = "";
-            if (null != XMLBase.Document.Root.Attribute("folio"))
+            if (null != XMLBase.Document.Root.Attribute("version"))
             {
-                if (!String.IsNullOrEmpty(XMLBase.Document.Root.Attribute("folio").Value))
-                {
-
-                    oXml.folio = XMLBase.Document.Root.Attribute("folio").Value;
-                }
+                oXml.version = (String)XMLBase.Document.Root.Attribute("version").Value;
             }
-            oXml.metodoDePago = XMLBase.Document.Root.Attribute("metodoDePago").Value;
 
-            oXml.rfcEmisor = xEmisor.Attributes("rfc").FirstOrDefault().Value;
-            oXml.nombreEmisor = xEmisor.Attributes("nombre").FirstOrDefault().Value;
-            oXml.rfcReceptor = xReceptor.Attributes("rfc").FirstOrDefault().Value;
-
-            oXml.nombreReceptor = "";
-            if (null != xReceptor.Attributes("nombre").FirstOrDefault())
+            if (null != XMLBase.Document.Root.Attribute("Version"))
             {
-                oXml.nombreReceptor = xReceptor.Attributes("nombre").FirstOrDefault().Value;
+                oXml.version = (String)XMLBase.Document.Root.Attribute("Version").Value;
             }
+
+
+            //oXml.version = (String)XMLBase.Document.Root.Attribute("version").Value;
+
+
+            switch (oXml.version)
+            {
+
+
+                case "3.2":
+
+
+                    oXml.tipodeComprobante = (String)XMLBase.Document.Root.Attribute("tipoDeComprobante").Value;
+                    oXml.total = Double.Parse(XMLBase.Document.Root.Attribute("total").Value);
+                    oXml.subTotal = Double.Parse(XMLBase.Document.Root.Attribute("subTotal").Value);
+                    oXml.fechaExpedido = DateTime.Parse(XMLBase.Document.Root.Attribute("fecha").Value);
+
+                    oXml.folio = "";
+                    if (null != XMLBase.Document.Root.Attribute("folio"))
+                    {
+                        if (!String.IsNullOrEmpty(XMLBase.Document.Root.Attribute("folio").Value))
+                        {
+
+                            oXml.folio = XMLBase.Document.Root.Attribute("folio").Value;
+                        }
+                    }
+                    oXml.metodoDePago = XMLBase.Document.Root.Attribute("metodoDePago").Value;
+
+                    oXml.rfcEmisor = xEmisor.Attributes("rfc").FirstOrDefault().Value;
+                    oXml.nombreEmisor = xEmisor.Attributes("nombre").FirstOrDefault().Value;
+                    oXml.rfcReceptor = xReceptor.Attributes("rfc").FirstOrDefault().Value;
+
+                    oXml.nombreReceptor = "";
+                    if (null != xReceptor.Attributes("nombre").FirstOrDefault())
+                    {
+                        oXml.nombreReceptor = xReceptor.Attributes("nombre").FirstOrDefault().Value;
+                    }
+
+                    break;
+
+                case "3.3":
+
+
+
+                    oXml.tipodeComprobante = (String)XMLBase.Document.Root.Attribute("TipoDeComprobante").Value;
+                    oXml.total = Double.Parse(XMLBase.Document.Root.Attribute("Total").Value);
+                    oXml.subTotal = Double.Parse(XMLBase.Document.Root.Attribute("SubTotal").Value);
+                    oXml.fechaExpedido = DateTime.Parse(XMLBase.Document.Root.Attribute("Fecha").Value);
+
+                    oXml.folio = "";
+                    if (null != XMLBase.Document.Root.Attribute("Folio"))
+                    {
+                        if (!String.IsNullOrEmpty(XMLBase.Document.Root.Attribute("Folio").Value))
+                        {
+
+                            oXml.folio = XMLBase.Document.Root.Attribute("Folio").Value;
+                        }
+                    }
+                    oXml.metodoDePago = XMLBase.Document.Root.Attribute("MetodoPago").Value;
+
+                    oXml.rfcEmisor = xEmisor.Attributes("Rfc").FirstOrDefault().Value;
+                    oXml.nombreEmisor = xEmisor.Attributes("Nombre").FirstOrDefault().Value;
+                    oXml.rfcReceptor = xReceptor.Attributes("Rfc").FirstOrDefault().Value;
+
+                    oXml.nombreReceptor = "";
+                    if (null != xReceptor.Attributes("Nombre").FirstOrDefault())
+                    {
+                        oXml.nombreReceptor = xReceptor.Attributes("Nombre").FirstOrDefault().Value;
+                    }
+
+
+                    break;
+
+
+                default:
+
+                    break;
+
+            }
+
+
 
 
             DateTime _fechaTimbrado = DateTime.Now;
@@ -232,6 +296,7 @@ namespace Proceso
                     hojaNueva.Cells[1, 11].Value = "Fecha Expedido";
                     hojaNueva.Cells[1, 12].Value = "Fecha Timbrado";
                     hojaNueva.Cells[1, 13].Value = "UUID";
+                    hojaNueva.Cells[1, 14].Value = "Archivo";
 
 
                     foreach (ComprobanteXML nRow in origen)
@@ -261,6 +326,7 @@ namespace Proceso
                         hojaNueva.Cells[contador, 12].Value = nRow.fechaTimbrado;
 
                         hojaNueva.Cells[contador, 13].Value = nRow.UUId;
+                        hojaNueva.Cells[contador, 13].Value = nRow.nombreArchivo;
 
 
                         contador = contador + 1;
