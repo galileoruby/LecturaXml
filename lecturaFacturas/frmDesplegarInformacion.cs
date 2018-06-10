@@ -17,12 +17,11 @@ namespace lecturaFacturas
 
         private void frmDesplegarInformacion_Load(object sender, EventArgs e)
         {
-            this.Text = "Desplegado de información.";
+            this.Text = "Resumen.";
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         internal void CargarFacturas(List<ComprobanteXML> source)
@@ -32,12 +31,6 @@ namespace lecturaFacturas
 
             dgvFacturas.DataSource = source;
             lblEstado.Text = String.Format("{0} Registros encontrados.", source.Count);
-
-
-
-
-
-
         }
 
         private void btnExportar_Click(object sender, EventArgs e)
@@ -46,15 +39,10 @@ namespace lecturaFacturas
 
             String sArchivo = String.Empty;
 
-
-
             using (SaveFileDialog fbRutaExcel = new SaveFileDialog())
-            {
-
-
+            {           
                 if (svdExcel.ShowDialog() == DialogResult.OK)
                 {
-
                     sArchivo = svdExcel.FileName;
                     txtRutaExcel.Text = sArchivo;
                 }
@@ -142,5 +130,5 @@ namespace lecturaFacturas
 
 
         }
-    }
-}
+    } //public partial class frmDesplegarInformacion : Form
+}//namespace lecturaFacturas

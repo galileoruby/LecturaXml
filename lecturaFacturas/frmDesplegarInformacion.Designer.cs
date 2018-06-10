@@ -26,6 +26,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDesplegarInformacion));
             this.gbx1 = new System.Windows.Forms.GroupBox();
             this.lblArchivo = new System.Windows.Forms.Label();
@@ -61,7 +64,7 @@
             this.gbx1.Controls.Add(this.dgvFacturas);
             this.gbx1.Location = new System.Drawing.Point(13, 13);
             this.gbx1.Name = "gbx1";
-            this.gbx1.Size = new System.Drawing.Size(1119, 391);
+            this.gbx1.Size = new System.Drawing.Size(1283, 391);
             this.gbx1.TabIndex = 0;
             this.gbx1.TabStop = false;
             this.gbx1.Text = "Información Recolectada";
@@ -98,7 +101,7 @@
             // btnExportar
             // 
             this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnExportar.Location = new System.Drawing.Point(962, 351);
+            this.btnExportar.Location = new System.Drawing.Point(1144, 351);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(119, 23);
             this.btnExportar.TabIndex = 1;
@@ -132,7 +135,7 @@
             this.dgvFacturas.Location = new System.Drawing.Point(6, 19);
             this.dgvFacturas.Name = "dgvFacturas";
             this.dgvFacturas.ReadOnly = true;
-            this.dgvFacturas.Size = new System.Drawing.Size(1107, 311);
+            this.dgvFacturas.Size = new System.Drawing.Size(1257, 311);
             this.dgvFacturas.TabIndex = 0;
             this.dgvFacturas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -145,25 +148,35 @@
             // rfcEmisor
             // 
             this.rfcEmisor.DataPropertyName = "rfcEmisor";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.rfcEmisor.DefaultCellStyle = dataGridViewCellStyle2;
             this.rfcEmisor.HeaderText = "RFC Emisor";
             this.rfcEmisor.MaxInputLength = 20;
             this.rfcEmisor.Name = "rfcEmisor";
             this.rfcEmisor.ReadOnly = true;
+            this.rfcEmisor.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // version
             // 
             this.version.DataPropertyName = "version";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.version.DefaultCellStyle = dataGridViewCellStyle3;
             this.version.HeaderText = "Version";
             this.version.Name = "version";
             this.version.ReadOnly = true;
+            this.version.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.version.Width = 50;
             // 
             // metodoDePago
             // 
             this.metodoDePago.DataPropertyName = "metodoDePago";
-            this.metodoDePago.HeaderText = "Metodo de Pago";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.metodoDePago.DefaultCellStyle = dataGridViewCellStyle4;
+            this.metodoDePago.HeaderText = "Método de Pago";
             this.metodoDePago.MaxInputLength = 50;
             this.metodoDePago.Name = "metodoDePago";
             this.metodoDePago.ReadOnly = true;
+            this.metodoDePago.Width = 120;
             // 
             // nombreEmisor
             // 
@@ -172,6 +185,7 @@
             this.nombreEmisor.MaxInputLength = 200;
             this.nombreEmisor.Name = "nombreEmisor";
             this.nombreEmisor.ReadOnly = true;
+            this.nombreEmisor.Width = 150;
             // 
             // rfcReceptor
             // 
@@ -196,13 +210,15 @@
             this.tipodeComprobante.MaxInputLength = 50;
             this.tipodeComprobante.Name = "tipodeComprobante";
             this.tipodeComprobante.ReadOnly = true;
+            this.tipodeComprobante.Width = 50;
             // 
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle5;
             this.total.HeaderText = "Total";
             this.total.MaxInputLength = 20;
             this.total.Name = "total";
@@ -211,9 +227,10 @@
             // subTotal
             // 
             this.subTotal.DataPropertyName = "subTotal";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.subTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.subTotal.DefaultCellStyle = dataGridViewCellStyle6;
             this.subTotal.HeaderText = "Sub Total";
             this.subTotal.MaxInputLength = 30;
             this.subTotal.Name = "subTotal";
@@ -261,7 +278,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1138, 416);
+            this.ClientSize = new System.Drawing.Size(1308, 416);
             this.Controls.Add(this.gbx1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
