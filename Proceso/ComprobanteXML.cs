@@ -3,12 +3,7 @@
 namespace Proceso {
     public class ComprobanteXML {
 
-
-    
-
-
-
-
+        
       public String tipodeComprobante { get; set; }
 
       public String metodoDePago { get; set; }
