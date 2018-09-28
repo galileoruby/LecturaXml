@@ -11,6 +11,8 @@ namespace lecturaFacturas
         Respuesta oRespuesta;
         List<ComprobanteXML> facturasGrid;
 
+         
+
         public frmLecturaArchivo()
         {
             InitializeComponent();
@@ -18,7 +20,7 @@ namespace lecturaFacturas
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
-            this.Text = "Facturas";
+            this.Text = "Lector XML 1.0";
             lblEstado.Text = "Listo";
         }
 

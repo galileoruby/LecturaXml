@@ -9,9 +9,6 @@ namespace Proceso
 {
     public class Operacion
     {
-
-
-
         private String sCarpeta;
         List<String> extraccionXML;
         public List<ComprobanteXML> facturasGrid;
@@ -25,22 +22,17 @@ namespace Proceso
 
             res = new Respuesta();
 
-
-
             if (String.IsNullOrEmpty(carpeta))
             {
                 res.Mensaje = "No se ha cargado una carpeta valida.";
                 return res;
             }
 
-
-
             sCarpeta = carpeta;
             res.Mensaje = String.Format("Cargando archivos de carpeta: {0} ", carpeta);
 
 
             return res;
-
 
         }
 
@@ -78,7 +70,6 @@ namespace Proceso
                 facturasGrid.Add(xmlAgregar);
             }
 
-
             return facturasGrid;
         }
 
@@ -95,7 +86,7 @@ namespace Proceso
                     //if (0 != String.Compare(, "XML")) {
                     FileInfo existencia = new FileInfo(f);
 
-                    if (0 == String.Compare(existencia.Extension, ".xml"))
+                    if (0 == String.Compare(existencia.Extension.ToLower(), ".xml"))
                         files.Add(f);
                 }
                 foreach (string d in Directory.GetDirectories(sDir))
@@ -103,7 +94,7 @@ namespace Proceso
 
                     FileInfo existencia = new FileInfo(d);
 
-                    if (0 == String.Compare(existencia.Extension, ".xml"))
+                    if (0 == String.Compare(existencia.Extension.ToLower(), ".xml"))
                         files.AddRange(iterarDirectorio(d));
                 }
             }
@@ -248,9 +239,19 @@ namespace Proceso
 
             DateTime _fechaTimbrado = DateTime.Now;
 
-            DateTime.TryParse(xComplemento.Attributes("FechaTimbrado").FirstOrDefault().Value, out _fechaTimbrado);
-            oXml.fechaTimbrado = _fechaTimbrado;
-            oXml.UUId = xComplemento.Attributes("UUID").FirstOrDefault().Value.ToString();
+            XAttribute fechaTimbrado = xComplemento.Attributes("FechaTimbrado").FirstOrDefault();
+
+            if (null != fechaTimbrado)
+            {
+
+                DateTime.TryParse(xComplemento.Attributes("FechaTimbrado").FirstOrDefault().Value, out _fechaTimbrado);
+                oXml.fechaTimbrado = _fechaTimbrado;
+                oXml.UUId = xComplemento.Attributes("UUID").FirstOrDefault().Value.ToString();
+            }
+            else
+            {
+                oXml.UUId = "n-a";
+            }
 
             return oXml;
 
@@ -310,7 +311,6 @@ namespace Proceso
                         hojaNueva.Cells[contador, 6].Value = nRow.metodoDePago;
                         hojaNueva.Cells[contador, 7].Value = nRow.folio;
                         hojaNueva.Cells[contador, 8].Value = nRow.version;
-
                         //$#,##0.00
                         hojaNueva.Cells[contador, 9].Style.Numberformat.Format = "$#,##0.00";
                         hojaNueva.Cells[contador, 9].Value = nRow.subTotal;
@@ -320,13 +320,10 @@ namespace Proceso
 
                         hojaNueva.Cells[contador, 11].Style.Numberformat.Format = "yyyy-mm-dd hh:mm:ss";
                         hojaNueva.Cells[contador, 11].Value = nRow.fechaExpedido;
-
-
                         hojaNueva.Cells[contador, 12].Style.Numberformat.Format = "yyyy-mm-dd hh:mm:ss";
                         hojaNueva.Cells[contador, 12].Value = nRow.fechaTimbrado;
-
                         hojaNueva.Cells[contador, 13].Value = nRow.UUId;
-                        hojaNueva.Cells[contador, 13].Value = nRow.nombreArchivo;
+                        hojaNueva.Cells[contador, 14].Value = nRow.nombreArchivo;
 
 
                         contador = contador + 1;
@@ -341,6 +338,8 @@ namespace Proceso
 
                     paquete.SaveAs(guardarExcel);
 
+                    
+
                 }
 
 
@@ -349,12 +348,10 @@ namespace Proceso
             }
             catch (Exception e)
             {
-                throw new Exception("Error al generar excel,revise configuración.");
+                throw new Exception("Error al generar excel,revise configuración." + e.Message);
             }
 
 
         }
-
-
     }
 } //namespace Proceso
