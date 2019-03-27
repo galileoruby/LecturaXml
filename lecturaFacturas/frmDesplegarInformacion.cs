@@ -31,7 +31,16 @@ namespace lecturaFacturas
 
             dgvFacturas.DataSource = source;
             lblEstado.Text = String.Format("{0} Registros encontrados.", source.Count);
+
+            Registros = source;
         }
+
+
+        public static List<ComprobanteXML> Registros {
+            get; set;
+
+        }
+
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
@@ -118,7 +127,8 @@ namespace lecturaFacturas
 
             try
             {
-                nObjetoExportar.EscribirExcel(exportar, sArchivo);
+                //nObjetoExportar.EscribirExcel(exportar, sArchivo);
+                nObjetoExportar.EscribirExcel(Registros, sArchivo);
                 lblArchivo.Text = String.Format("{0} se ha guardado correctamente.", sArchivo);
                 MessageBox.Show(String.Format("{0} se ha guardado correctamente.", sArchivo));
 

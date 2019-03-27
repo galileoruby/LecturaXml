@@ -39,7 +39,7 @@ namespace lecturaFacturas
 
             lblEstado.Text = oRespuesta.Mensaje;
 
-            facturasGrid = oExtraer.ArchivosXmlaProcesarObtener(txtRutaCarpeta.Text);
+            facturasGrid = oExtraer.ArchivosXmlaProcesarObtener(txtRutaCarpeta.Text, ref lblEstatus);
 
 
             frmDesplegarInformacion of = new frmDesplegarInformacion();
