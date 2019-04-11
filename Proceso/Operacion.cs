@@ -95,7 +95,12 @@ namespace Proceso
                     //if (0 != String.Compare(, "XML")) {
                     FileInfo existencia = new FileInfo(f);
 
-                    if (0 == String.Compare(existencia.Extension, ".xml"))
+
+
+
+
+
+                    if (Path.GetExtension(f).ToString().ToUpper() == ".XML")
                         files.Add(f);
                 }
                 foreach (string d in Directory.GetDirectories(sDir))
@@ -212,7 +217,7 @@ namespace Proceso
                     oXml.subTotal = Double.Parse(XMLBase.Document.Root.Attribute("SubTotal").Value);
                     oXml.fechaExpedido = DateTime.Parse(XMLBase.Document.Root.Attribute("Fecha").Value);
 
-                    oXml.folio = "";
+                    oXml.folio = String.Empty;
                     if (null != XMLBase.Document.Root.Attribute("Folio"))
                     {
                         if (!String.IsNullOrEmpty(XMLBase.Document.Root.Attribute("Folio").Value))
@@ -221,13 +226,21 @@ namespace Proceso
                             oXml.folio = XMLBase.Document.Root.Attribute("Folio").Value;
                         }
                     }
-                    oXml.metodoDePago = XMLBase.Document.Root.Attribute("MetodoPago").Value;
+
+                    if (null != XMLBase.Document.Root.Attribute("MetodoPago"))
+                    {
+                        oXml.metodoDePago = XMLBase.Document.Root.Attribute("MetodoPago").Value;
+                    }
 
                     oXml.rfcEmisor = xEmisor.Attributes("Rfc").FirstOrDefault().Value;
-                    oXml.nombreEmisor = xEmisor.Attributes("Nombre").FirstOrDefault().Value;
+                    if (null != xEmisor.Attributes("Nombre").FirstOrDefault())
+                    {
+                        oXml.nombreEmisor = xEmisor.Attributes("Nombre").FirstOrDefault().Value;
+                    }
+
                     oXml.rfcReceptor = xReceptor.Attributes("Rfc").FirstOrDefault().Value;
 
-                    oXml.nombreReceptor = "";
+                    oXml.nombreReceptor = String.Empty;
                     if (null != xReceptor.Attributes("Nombre").FirstOrDefault())
                     {
                         oXml.nombreReceptor = xReceptor.Attributes("Nombre").FirstOrDefault().Value;
